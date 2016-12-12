@@ -1,0 +1,13 @@
+.app {
+     /* Add app styles here */
+}
+
+.iteration {
+    float: left;
+    display: inline;
+}
+.project {
+    float: left;
+    display: inline;
+    margin-left: 10px;
+}

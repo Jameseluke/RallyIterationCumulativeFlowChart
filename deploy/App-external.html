@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cfd</title>
+
+    <script type="text/javascript" src="https://rally1.rallydev.com/apps/2.1/sdk.js"></script>
+
+    <script type="text/javascript">
+        Rally.onReady(function () {
+                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",config:{},launch:function(){this.iterationCombobox=this.add({cls:"iteration",xtype:"rallyiterationcombobox",stateful:!0,stateId:this.getContext().getScopedStateId("priority"),listeners:{ready:this._onIterationComboboxLoad,select:this._onIterationComboboxChanged,scope:this}})},_onIterationComboboxLoad:function(){console.log(this.iterationCombobox.getQueryFromSelected())},_onIterationComboboxChanged:function(){console.log(this.iterationCombobox.getQueryFromSelected())}});
+
+            Rally.launchApp('CustomApp', {
+                name:"cfd",
+	            parentRepos:""
+            });
+
+        });
+    </script>
+
+
+    <style type="text/css">
+        .iteration{float:left;display:inline}.project{float:left;display:inline;margin-left:10px}
+    </style>
+</head>
+<body>
+</body>
+</html>
