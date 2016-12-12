@@ -5,6 +5,7 @@ Ext.define('CustomApp', {
         
     },
     launch: function() {
+        EndDate = new Date();
         this.iterationCombobox = this.add({
         cls: 'iteration',
         xtype: 'rallyiterationcombobox',
@@ -32,11 +33,12 @@ Ext.define('CustomApp', {
         this.down('#reportContainer').add({
             xtype: 'rallystandardreport',
             itemId: 'report',
-            width: 800,
-            height: 400,
+            width: this.getBox()["width"] - 20,
+            height: this.getBox()["height"] - 30,
             reportConfig: {
                 report: 'IterationCumulativeFlowDiagram',
-                iterations: combobox.getValue()
+                iterations: combobox.getValue(),
+                            legend: 'hide',
             }
         });
     }
