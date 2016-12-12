@@ -20,20 +20,34 @@
         stateful: true,
         stateId: this.getContext().getScopedStateId('priority'),
         listeners: {
-            ready: this._onIterationComboboxLoad,
-            select: this._onIterationComboboxChanged,
+            ready: this._onIterationCombobox,
+            select: this._onIterationCombobox,
             scope: this
         }
     });
+    this.add({
+            xtype: 'container',
+            itemId: 'reportContainer'
+        });
         //API Docs: https://help.rallydev.com/apps/2.1/doc/
     },
     
-    _onIterationComboboxLoad: function(){
-        console.log(this.iterationCombobox.getQueryFromSelected());
-    },
-    
-    _onIterationComboboxChanged: function() {
-        console.log(this.iterationCombobox.getQueryFromSelected());
+    _onIterationCombobox: function(combobox){
+        console.log('iteration', combobox.getValue());
+        if (Ext.ComponentQuery.query('rallystandardreport[itemId=report]')[0]) {
+            console.log('report exists');
+            Ext.ComponentQuery.query('#reportContainer')[0].remove(Ext.ComponentQuery.query('rallystandardreport[itemId=report]')[0], true);
+        }
+        this.down('#reportContainer').add({
+            xtype: 'rallystandardreport',
+            itemId: 'report',
+            width: 800,
+            height: 400,
+            reportConfig: {
+                report: 'IterationCumulativeFlowDiagram',
+                iterations: combobox.getValue()
+            }
+        });
     }
 });
 

@@ -7,7 +7,7 @@
 
     <script type="text/javascript">
         Rally.onReady(function () {
-                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",config:{},launch:function(){this.iterationCombobox=this.add({cls:"iteration",xtype:"rallyiterationcombobox",stateful:!0,stateId:this.getContext().getScopedStateId("priority"),listeners:{ready:this._onIterationComboboxLoad,select:this._onIterationComboboxChanged,scope:this}})},_onIterationComboboxLoad:function(){console.log(this.iterationCombobox.getQueryFromSelected())},_onIterationComboboxChanged:function(){console.log(this.iterationCombobox.getQueryFromSelected())}});
+                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",config:{},launch:function(){this.iterationCombobox=this.add({cls:"iteration",xtype:"rallyiterationcombobox",stateful:!0,stateId:this.getContext().getScopedStateId("priority"),listeners:{ready:this._onIterationCombobox,select:this._onIterationCombobox,scope:this}}),this.add({xtype:"container",itemId:"reportContainer"})},_onIterationCombobox:function(combobox){console.log("iteration",combobox.getValue()),Ext.ComponentQuery.query("rallystandardreport[itemId=report]")[0]&&(console.log("report exists"),Ext.ComponentQuery.query("#reportContainer")[0].remove(Ext.ComponentQuery.query("rallystandardreport[itemId=report]")[0],!0)),this.down("#reportContainer").add({xtype:"rallystandardreport",itemId:"report",width:800,height:400,reportConfig:{report:"IterationCumulativeFlowDiagram",iterations:combobox.getValue()}})}});
 
             Rally.launchApp('CustomApp', {
                 name:"cfd",
